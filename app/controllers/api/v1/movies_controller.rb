@@ -19,6 +19,7 @@ class Api::V1::MoviesController < ActionController::API
   # POST /movies
   def create
     @movie = Movie.create!(movie_params)
+    PaymentWorker.perform_async(@movie.id)
     render json: @movie.to_json(except: [ :created_at, :updated_at ]), status: :created
   end
 
