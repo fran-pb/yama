@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 2021_03_20_195619) do
   create_table "movie_roles", force: :cascade do |t|
     t.bigint "movie_id", null: false
     t.bigint "person_id", null: false
-    t.string "role"
+    t.string "role", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["movie_id", "person_id", "role"], name: "index_movie_roles_on_movie_id_and_person_id_and_role", unique: true
@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 2021_03_20_195619) do
 
   create_table "payments", force: :cascade do |t|
     t.bigint "movie_id", null: false
-    t.string "api_response_code"
+    t.string "api_response_code", null: false
     t.string "api_response_body"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -48,8 +48,8 @@ ActiveRecord::Schema.define(version: 2021_03_20_195619) do
   end
 
   create_table "people", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
+    t.string "first_name", null: false
+    t.string "last_name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

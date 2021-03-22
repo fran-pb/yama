@@ -7,6 +7,12 @@ class Movie < ApplicationRecord
   end
 
   validates :title, :year, presence: true
+  validates :year, numericality: {
+    only_integer: true,
+    greater_than: 1960,
+    less_than_or_equal_to: Proc.new {|record| Date.current.year }
+  }
+
   after_validation :set_slug, only: [:create, :update]
 
   # Force Rails to use both slug and ids instead of just the ids by overwriting the to_param method
@@ -16,12 +22,12 @@ class Movie < ApplicationRecord
   # > "1-el-secreto-de-sus-ojos".to_i
   # => 1
   # > Movie.find("1-el-secreto-de-sus-ojos")
-  
+
   def to_param
     "#{id}-#{slug}"
   end
 
-  private
+  private  
 
   def set_slug
     self.slug = title.to_s.parameterize
