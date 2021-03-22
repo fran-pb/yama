@@ -6,6 +6,8 @@ class Movie < ApplicationRecord
     has_many :"#{role.pluralize}", through: base, source: :person
   end
 
+  has_one :payment, dependent: :destroy
+
   validates :title, :year, presence: true
   validates :year, numericality: {
     only_integer: true,
