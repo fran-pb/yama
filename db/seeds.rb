@@ -25,3 +25,5 @@ secreto = Movie.create(title: "El secreto de sus ojos", year: "2009", genre: "Su
 secreto.directors << campanella
 secreto.producers << [campanella, besuievski, urbieta]
 secreto.characters << [darin, villamil, rago, godino, francella]
+
+User.create(first_name: 'Francisco', last_name: 'Peña', email: 'tkd.inbox@gmail.com', is_admin: true)

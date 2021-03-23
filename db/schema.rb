@@ -40,11 +40,13 @@ ActiveRecord::Schema.define(version: 2021_03_20_195619) do
 
   create_table "payments", force: :cascade do |t|
     t.bigint "movie_id", null: false
+    t.bigint "user_id", null: false
     t.string "api_response_code", null: false
     t.string "api_response_body"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["movie_id"], name: "index_payments_on_movie_id"
+    t.index ["user_id"], name: "index_payments_on_user_id"
   end
 
   create_table "people", force: :cascade do |t|
@@ -54,7 +56,20 @@ ActiveRecord::Schema.define(version: 2021_03_20_195619) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string "email", null: false
+    t.string "first_name", null: false
+    t.string "last_name", null: false
+    t.string "token", null: false
+    t.boolean "is_admin", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_users_on_email"
+    t.index ["token"], name: "index_users_on_token"
+  end
+
   add_foreign_key "movie_roles", "movies"
   add_foreign_key "movie_roles", "people"
   add_foreign_key "payments", "movies"
+  add_foreign_key "payments", "users"
 end
