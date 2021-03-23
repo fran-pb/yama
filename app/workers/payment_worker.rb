@@ -2,7 +2,7 @@ class PaymentWorker
   include Sidekiq::Worker
   require 'net/http'
 
-  def perform(movie_id)
+  def perform(movie_id, user_id)
     # is just a simple example, in a real scenario the payment behavior and error handling
     # should be encapsulated and not carried out within the worker
     
@@ -11,6 +11,6 @@ class PaymentWorker
 
     response = Net::HTTP.get_response(uri)
 
-    Payment.create(movie: Movie.find(movie_id), api_response_code: response.code, api_response_body: response.body)
+    Payment.create(movie_id: movie_id, user_id: user_id, api_response_code: response.code, api_response_body: response.body)
   end
 end

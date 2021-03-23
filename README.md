@@ -5,12 +5,17 @@
 ### System dependencies
 
 - Docker & docker-compose
+- Heroku CLI
 
 ### Docker images
 
 Ruby image: ```ruby:3.0.0```
 
 Postgresql image: ```postgres:13-alpine```
+
+Redis: image ```redis:6-alpine```
+
+Sidekiq: ```6.2.0```
 
 ### Configuration .env (template)
 
@@ -26,6 +31,8 @@ DATABASE_PASS=root
 ```bash
 docker-compose build
 docker-compose up
+docker-compose run --rm app bundle install
+docker-compose run --rm app yarn
 ```
 
 ## DATABASE

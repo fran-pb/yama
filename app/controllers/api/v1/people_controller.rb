@@ -1,6 +1,7 @@
-class Api::V1::PeopleController < ActionController::API
+class Api::V1::PeopleController < SecuredController
   include ExceptionHandler
   before_action :set_person, only: [:show, :update, :destroy]
+  skip_before_action :authenticate, only: [:index, :show]
 
   # GET /people
   def index
@@ -34,15 +35,15 @@ class Api::V1::PeopleController < ActionController::API
 
   private
 
-  def person_params
-    params.permit(
-      :first_name,
-      :last_name
-    )
-  end
+    def person_params
+      params.permit(
+        :first_name,
+        :last_name
+      )
+    end
 
-  def set_person
-    @person = Person.find(params[:id])
-  end
+    def set_person
+      @person = Person.find(params[:id])
+    end
 
 end

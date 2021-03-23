@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :movies
       resources :people
+      resources :users
     end
   end
 

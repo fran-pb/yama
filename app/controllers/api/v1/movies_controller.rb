@@ -1,6 +1,7 @@
-class Api::V1::MoviesController < ActionController::API
+class Api::V1::MoviesController < SecuredController
   include ExceptionHandler
   before_action :set_movie, only: [:show, :update, :destroy]
+  skip_before_action :authenticate, only: [:index, :show]
 
   # GET /movies
   def index
@@ -12,7 +13,7 @@ class Api::V1::MoviesController < ActionController::API
   # POST /movies
   def create
     movie = Movie.create!(movie_params)
-    PaymentWorker.perform_async(movie.id)
+    PaymentWorker.perform_async(movie.id, current_user.id)
     render json: MovieSerializer.new(movie), status: :created
   end
 
@@ -35,19 +36,19 @@ class Api::V1::MoviesController < ActionController::API
 
   private
 
-  def movie_params
-    params.permit(
-      :title,
-      :year,
-      :imdbid,
-      :genre,
-      :plot,
-      :country
-    )
-  end
+    def movie_params
+      params.permit(
+        :title,
+        :year,
+        :imdbid,
+        :genre,
+        :plot,
+        :country
+      )
+    end
 
-  def set_movie
-    @movie = Movie.find(params[:id])
-  end
+    def set_movie
+      @movie = Movie.find(params[:id])
+    end
 
 end
