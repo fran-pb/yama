@@ -20,7 +20,7 @@ rago = Person.create(first_name: "Pablo", last_name: "Rago") # character
 godino = Person.create(first_name: "Javier", last_name: "Godino") # character
 francella = Person.create(first_name: "Guillermo", last_name: "Francella") # character
 
-secreto = Movie.create(title: "El secreto de sus ojos", year: "2009", genre: "Suspenso/Drama", country: "Argentina/España")
+secreto = Movie.create(title: "El secreto de sus ojos", year: 2009, genre: "Suspenso/Drama", country: "Argentina/España")
 
 secreto.directors << campanella
 secreto.producers << [campanella, besuievski, urbieta]

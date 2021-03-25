@@ -15,8 +15,14 @@ gem 'sidekiq', '~> 6.2'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
+gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'master'
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'database_cleaner'
+  gem 'factory_bot_rails'
+  gem 'shoulda-matchers'
+  gem 'rspec-rails'
 end
 
 group :development do

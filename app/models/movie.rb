@@ -11,7 +11,7 @@ class Movie < ApplicationRecord
   validates :title, :year, presence: true
   validates :year, numericality: {
     only_integer: true,
-    greater_than: 1960,
+    greater_than_or_equal_to: 1960,
     less_than_or_equal_to: Proc.new {|record| Date.current.year }
   }
 
